@@ -1,0 +1,41 @@
+public enum Number
+  {
+    A = 1,
+    Two,
+    Three,
+    Four,
+    Five,
+    Six,
+    Seven,
+    Eight,
+    Nine,
+    T,
+    J,
+    Q,
+    K
+  };
+
+public enum Suit
+  {
+    Hearts = 0,
+    Diamonds,
+    Clubs,
+    Spades
+  };
+
+  public class Card
+  {
+    public Suit Suid { get; }
+    public Number Number { get; }
+
+    public Card(Number number, Suit suit)
+    {
+        Number = number;
+        Suid = suit;
+    }
+
+    public override string ToString()
+    {
+        return  "Number: " + Number + " Suit: " + Suid;
+    }
+ }
