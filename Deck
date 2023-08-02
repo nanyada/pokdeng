@@ -1,0 +1,21 @@
+public class Deck
+{
+
+    private List<Card> _deck;
+    public int _deckDimension { get; }
+
+    public Deck()
+    {
+        this._deckDimension = 52;
+        this._deck = new List<Card>(_deckDimension);
+
+        foreach (Suit s in Enum.GetValues(typeof(Suit)))
+        {
+            foreach (Number v in Enum.GetValues(typeof(Number)))
+            {
+                Card c = new Card(v, s);
+                _deck.Add(c);
+            }
+        }
+    }
+}
