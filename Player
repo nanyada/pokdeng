@@ -1,0 +1,95 @@
+public class Player
+{
+    private float _stack { get; }
+    private List<Card> _hand { get; }
+
+    public Player()
+    {
+        _hand = new List<Card>(2);
+    }
+
+
+    public void ReceiveCard(Card c)
+    {
+        _hand.Add(c);
+    }
+
+
+    public List<Card> GetHand()
+    {
+        return _hand;
+    }
+}
+
+public bool IsPok
+	{
+		get
+		{
+            return Cards.GroupBy(h => h.Value)
+						.Where(g => g.Count() == 2)
+					   .Count() == 1;
+		}
+	}
+
+public bool IsDouble
+	{
+		get
+		{
+			return Cards.GroupBy(h => h.Value)
+						.Where(g => g.Count() == 2)
+						.Count() == 2;
+		}
+	}
+
+public bool IsThreeOfKind
+	{
+		get
+		{
+			return Cards.GroupBy(h => h.Value)
+						.Where(g => g.Count() == 3)
+						.Any();
+		}
+	}
+
+public bool IsFlush
+	{
+		get
+		{
+			return Cards.GroupBy(h => h.Suit).Count() == 1;
+		}
+	}
+
+public bool IsStraightFlush
+	{
+		get
+		{
+			return IsStraight && IsFlush;
+		}
+	}
+
+public bool IsStraight
+	{
+		get
+		{
+			// If there is an Ace, we have to handle the 10,J,Q,K,A case, which isn't handled by the code
+			// below because Ace is normally 0
+			if (Contains(Value.Ace) &&
+				Contains(Value.King) &&
+				Contains(Value.Queen) &&
+				Contains(Value.Jack) &&
+				Contains(Value.Ten))
+			{
+				return true;
+			}
+
+			var ordered = Cards.OrderBy(h => h.Value).ToArray();
+			var straightStart = (int)ordered.First().Value;
+			for (var i = 1; i < ordered.Length; i++)
+			{
+				if ((int)ordered[i].Value != straightStart + i)
+					return false;
+			}
+
+			return true;
+		}
+	}
